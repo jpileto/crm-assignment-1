@@ -14,6 +14,8 @@ class Contact
     @note = note
 
     @id = @@next_id
+    # @@contacts << new_contact
+
 
   end
 
@@ -35,24 +37,46 @@ class Contact
 
   # This method should accept an id as an argument
   # and return the contact who has that id
-  def self.find
-
+  def self.find(id)
+    @@contacts.each do |contact|
+      if id == contact.id
+        return contact
+      end
+    end
   end
 
   # This method should allow you to specify
   # 1. which of the contact's attributes you want to update
   # 2. the new value for that attribute
   # and then make the appropriate change to the contact
-  def update
-
+  def update(attr_to_change, new_value)
+    if attr_to_change == "first_name"
+      self.first_name = new_value
+    elsif attr_to_change == "last_name"
+      self.last_name = new_value
+    elsif attr_to_change == "email"
+      self.email = new_value
+    elsif attr_to_change == "note"
+      self.note = new_value
+    end
   end
 
   # This method should work similarly to the find method above
   # but it should allow you to search for a contact using attributes other than id
   # by specifying both the name of the attribute and the value
   # eg. searching for 'first_name', 'Betty' should return the first contact named Betty
-  def self.find_by
-
+  def self.find_by(attribute, value)
+    @@contacts.each do |contact|
+      if value == contact.first_name
+        return contact
+      elsif value == contact.last_name
+        return contact
+      elsif value == contact.email
+        return contact
+      elsif value == contact.note
+        return contact
+      end
+    end
   end
 
   # This method should delete all of the contacts
